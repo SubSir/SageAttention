@@ -66,7 +66,7 @@ def _attn_fwd_inner(
 
             # 完全替换softmax过程为查表
             # 直接用qk值查表，不需要减去最大值，不需要exp，不需要归一化
-            lut_indices = ((qk + 1.0) * 1.0).to(tl.int8)
+            lut_indices = ((qk + 1.0) * 1.0).to(tl.uint8)
             # 确保索引在有效范围内
             lut_indices = tl.maximum(lut_indices, 0)
             lut_indices = tl.minimum(lut_indices, 199)
